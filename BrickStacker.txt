@@ -1,0 +1,35 @@
+07/01/2023 - Brick Stack Clone
+--------------------------
+Today I am begining to work on a very simple clone of a tower/brick stacking game.
+
+The first two tasks are fairly easy. 1.Create a platform to begin building a tower on.
+---
+I created a block which is 1 high x 8 wide at the bottom of the screen.
+
+
+2.Create a 6-piece Active Block.
+---
+I have created an empty gameObject which has 6 1x1 sprites as children laid out to make a 1x6 long block.
+
+
+After this I needed to get the Active Block moving to left of the screen, then to the right and back again, this movement would repeat until the player pressed an input.
+
+3. Moving the Active block
+---
+I created a script which would move the active block one unity unit across the screen towards the left every x amount of seconds. Once the block reach the left most limit of the screen, it would begin moving to the right until the right limit was reached, then it returned towards the left. this is done using a repeating co-routine.
+
+
+With the block moving, I now needed to consider how I was going to record the player's input. Once the input is recorded the movement cycle needs to stop.
+
+4. Stopping the Active Block
+---
+
+I used a boolen to detemine if the co-routine moving the Active Block should continue repeating. When they player pressed their input, the bool changes to false and the Active Block stops before the next movement frame.
+
+
+After this I needed to make any blocks overhanging the edge of the platform fall away; which is where I have encountered my first real problem.
+
+5. Dropping the overhang
+---
+I was using colliders to change a Bool depending on if the sub-block was currently over the platform. The issue was once the drop occurred it was either dropping one to  many or one to few. the odd thing was that if it dropped one to many the bool would be in a state were the last sub block should NOT have dropped; and if on to few dropped. the hanging block's bool was in a state where is SHOULD have fallen.
+
